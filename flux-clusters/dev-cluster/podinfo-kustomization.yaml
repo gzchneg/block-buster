@@ -9,6 +9,17 @@ spec:
   path: ./kustomize
   prune: true
   retryInterval: 2m0s
+  patches:
+    - patch: |-
+        apiVersion: autoscaling/v2
+        kind: HorizontalPodAutoscaler
+        metadata:
+          name: podinfo
+        spec:
+          minReplicas: 3             
+      target:
+        name: podinfo
+        kind: HorizontalPodAutoscaler
   sourceRef:
     kind: GitRepository
     name: podinfo
